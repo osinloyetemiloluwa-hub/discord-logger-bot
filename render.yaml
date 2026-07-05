@@ -8,6 +8,7 @@ databases:
 services:
   - type: worker
     name: discord-bot
+    runtime: python
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt
@@ -22,6 +23,7 @@ services:
 
   - type: web
     name: discord-api
+    runtime: python
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt
@@ -31,5 +33,3 @@ services:
         fromDatabase:
           name: discord-logs-db
           property: connectionString
-      - key: FLASK_DEBUG
-        value: "false"
