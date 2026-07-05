@@ -1,10 +1,13 @@
 # Render Blueprint - Discord Logger Bot
-# Deploy both bot and API as separate services
+
+database:
+  name: discord-logs-db
+  plan: free
+  databaseName: discord_logs
 
 services:
-  # Discord Bot Worker
-  - name: discord-bot
-    env: python
+  - type: worker
+    name: discord-bot
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt
@@ -17,9 +20,8 @@ services:
           name: discord-logs-db
           property: connectionString
 
-  # Flask API
-  - name: discord-api
-    env: python
+  - type: web
+    name: discord-api
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt
@@ -30,9 +32,4 @@ services:
           name: discord-logs-db
           property: connectionString
       - key: FLASK_DEBUG
-        value: false
-
-databases:
-  - name: discord-logs-db
-    plan: free
-    databaseName: discord_logs
+        value: "false"
