@@ -1,9 +1,9 @@
 # Render Blueprint - Discord Logger Bot
 
-database:
-  name: discord-logs-db
-  plan: free
-  databaseName: discord_logs
+databases:
+  - name: discord-logs-db
+    plan: free
+    databaseName: discord_logs
 
 services:
   - type: worker
